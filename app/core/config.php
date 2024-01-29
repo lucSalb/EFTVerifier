@@ -1,4 +1,4 @@
 <?php
 
-define('ROOT','http://localhost/SMVerifier/public');
+define('ROOT','http://localhost/SMVerifier');
 define('APP_NAME','SMVerifier');

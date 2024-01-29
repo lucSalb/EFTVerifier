@@ -123,7 +123,7 @@
                             <form class=\"modal-footer\" method=\"post\">
                                 <input id=\"SMSNo\" name=\"SeriesNo\" hidden/>
                                 <button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\">Cancel</button>
-                                <button  name=\"submitDeleteForm\" type=\"submit\" class=\"btn btn-primary\">Yes</a>
+                                <button  name=\"submitDeleteForm\" type=\"submit\" class=\"btn btn-primary\">Yes</button>
                             </form>
                         </div>
                     </div>

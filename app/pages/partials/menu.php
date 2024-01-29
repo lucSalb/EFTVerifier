@@ -2,8 +2,8 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=ROOT?>">
-        <img src="<?=ROOT?>/img/EFTLogoWhite.png" style="width:70px;height:50px"/>
-        <div class="sidebar-brand-text mx-3">SMChecker</div>
+        <img src="<?=ROOT?>/public/img/EFTLogoWhite.png" style="width:70px;height:50px"/>
+        <div class="sidebar-brand-text mx-3"><?=APP_NAME?></div>
     </a>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">

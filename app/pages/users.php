@@ -47,6 +47,10 @@
                     if($module['Username'] != $_SESSION['Username'])
                     {
                         echo '  <td "width:80px"><a onclick="removeUser(\'' . $module['Username'] . '\')" class="delete-btn"><i class="fas fa-solid fa-trash"></i></a></td>';
+                    }
+                    else
+                    {
+                        echo '<td></td>';
                     }                  
                     echo '</tr>';
            
@@ -85,17 +89,17 @@
     <meta name="author" content="">
  
     <title><?=APP_NAME?> - <?php echo $PageTitle?></title>
-    <link rel="icon" type="image/x-icon" type="image/ico" href="<?=ROOT?>/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" type="image/ico" href="<?=ROOT?>/public/img/favicon.ico">
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?=ROOT?>/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?=ROOT?>//css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="<?=ROOT?>/css/SMStyle.css" rel="stylesheet">
+    <link href="<?=ROOT?>/public/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?=ROOT?>/public/public/css/SMStyle.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
@@ -123,7 +127,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"><?php echo $PageTitle; ?></h1>
-                        <a href="<?=ROOT?>/registerUser" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <a href="<?=ROOT?>/public/registerUser" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-plus fa-sm text-white-50"></i> 
                             Register user 
                         </a>
@@ -174,14 +178,14 @@
         <i class="fas fa-angle-up"></i>
     </a>
     <!-- Bootstrap core JavaScript-->
-    <script src="<?=ROOT?>//vendor/jquery/jquery.min.js"></script>
-    <script src="<?=ROOT?>//vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=ROOT?>/public/vendor/jquery/jquery.min.js"></script>
+    <script src="<?=ROOT?>/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?=ROOT?>//vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?=ROOT?>/public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?=ROOT?>//js/sb-admin-2.min.js"></script>
+    <script src="<?=ROOT?>/public/js/sb-admin-2.min.js"></script>
     <!--  -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {

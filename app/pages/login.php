@@ -57,13 +57,13 @@
     <link rel="icon" type="image/x-icon" type="image/ico" href="<?=ROOT?>/img/favicon.ico">
 
     <!-- Custom fonts for this template-->
-    <link href="<?php echo ROOT?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo ROOT?>/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?php echo ROOT?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo ROOT?>/public/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -80,7 +80,7 @@
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block" style="background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);">
                                 <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
-                                    <img src="<?=ROOT?>/img/EFTLogoWhite.png" style="width: 100px; height: 90px;" />
+                                    <img src="<?=ROOT?>/public/img/EFTLogoWhite.png" style="width: 100px; height: 90px;" />
                                     <h4 style="color: white;font-weight: bold;margin: 5px 0 0 0;">EFTVerifier</h4>
                                 </div>
                             </div>
@@ -123,11 +123,11 @@
     <?php include("partials/alerts.php");?>
     <!-- END ALERTS -->
     <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo ROOT?>/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo ROOT?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo ROOT?>/public/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo ROOT?>/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
-    <script src="<?php echo ROOT?>/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo ROOT?>/public/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
-    <script src="<?php echo ROOT?>/js/sb-admin-2.min.js"></script>
+    <script src="<?php echo ROOT?>/public/js/sb-admin-2.min.js"></script>
 </body>
 </html>

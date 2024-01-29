@@ -83,15 +83,15 @@
     <title><?=APP_NAME?> - <?php echo $PageTitle?></title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?=ROOT?>/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?=ROOT?>//css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="<?=ROOT?>/css/SMStyle.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon"   type="image/ico" href="<?=ROOT?>/img/favicon.ico">
+    <link href="<?=ROOT?>/public/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?=ROOT?>/public/css/SMStyle.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon"   type="image/ico" href="<?=ROOT?>/public/img/favicon.ico">
 
 </head>
 <body id="page-top">
@@ -169,14 +169,14 @@
         <i class="fas fa-angle-up"></i>
     </a>
     <!-- Bootstrap core JavaScript-->
-    <script src="<?=ROOT?>//vendor/jquery/jquery.min.js"></script>
-    <script src="<?=ROOT?>//vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=ROOT?>/public/vendor/jquery/jquery.min.js"></script>
+    <script src="<?=ROOT?>/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?=ROOT?>//vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?=ROOT?>/public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?=ROOT?>//js/sb-admin-2.min.js"></script>
+    <script src="<?=ROOT?>/public/js/sb-admin-2.min.js"></script>
     <!--  -->
     <script>
 

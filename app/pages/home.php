@@ -26,6 +26,7 @@
                             <th>Registered At</th>
                             <th>Registered By</th>
                             <th>Series No</th>
+                            <th>Security module name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                             <th>Registered At</th>
                             <th>Registered By</th>
                             <th>Series No</th>
+                            <th>Security module name</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -44,6 +46,7 @@
                     echo '  <td>'.$module['RegisteredAt'].'</td>';
                     echo '  <td>'.$module['RegisteredBy'].'</td>';
                     echo '  <td>'.$module['SeriesNo'].'</td>';
+                    echo '  <td>'.$module['Nickname'].'</td>';
                     echo '  <td "width:80px"><a onclick="removeSM(\'' . $module['SeriesNo'] . '\')" class="delete-btn"><i class="fas fa-solid fa-trash"></i></a></td>';
                     echo '</tr>';
                 }                                

@@ -30,6 +30,7 @@
                 $data["RegisteredAt"] = date("y-m-d");
                 $data["RegisteredBy"] = $_SESSION['Name'];
                 $data["SeriesNo"] = str_replace(' ', '', $_POST['SeriesNo']);  
+                $data["Nickname"] = $_POST['Nickname'];  
                 $response = addSecurityModule($data);
                 if(!$response['Success'])
                 {
@@ -100,9 +101,13 @@
                                         </div>
                                         <form class="user" method="post">
                                             <div class="form-group row">
-                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                <div class="col-sm-12 mb-3 mb-sm-2">
                                                     <input type="text" value="<?php echo old_value('SeriesNo')?>" class="form-control form-control-user" id="SMSeriesNo" name="SeriesNo"
                                                         placeholder="Security module series number">
+                                                </div>
+                                                <div class="col-sm-12 mb-3 mb-sm-2">
+                                                    <input type="text" value="<?php echo old_value('Nickname')?>" class="form-control form-control-user" id="SMNickName" name="Nickname"
+                                                        placeholder="Security name">
                                                 </div>
                                             </div>
                                             <button name="submitRegistrationForm" type="submit" class="btn btn-primary btn-user btn-block">
@@ -119,7 +124,7 @@
                                             <i class="fas fa-solid fa-qrcode" style="color:black; font-size:50px"></i>
                                         </a>
                                     </div>
-                                    <button id="runBtn" type="button" onclick="CameraControl()" class="btn btn-primary open-camera-btn" style="position: absolute; bottom: 20px;">Start capture</button>
+                                    <button id="runBtn" type="button" onclick="CameraControl()" class="btn btn-primary open-camera-btn" style="position: absolute; bottom: 20px;margin-left:20px">Start capture</button>
                                 </div>
                             </div>
                         </div>

@@ -19,11 +19,11 @@
             }
             if(empty($_POST['Password']))
             {
-                $errors['SeriesNo'] = "Password is required";
+                $errors['Password'] = "Password is required";
             }
             elseif(strlen($_POST['Password']) < 6)
             {
-                $errors['SeriesNo'] = "Password is at lease 6 characters long";
+                $errors['Password'] = "Password is at lease 6 characters long";
             }
             if(empty($errors))
             {

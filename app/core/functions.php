@@ -74,7 +74,7 @@ function addSecurityModule(array $data = [])
 
         $string = "mysql:hostname=".DBHOST.";dbname=".DBNAME;
         $con = new PDO($string, DBUSER, DBPASS);
-        $query = "INSERT INTO securitymodulestable (RegisteredAt, RegisteredBy, SeriesNo) VALUES (:RegisteredAt,:RegisteredBy,:SeriesNo)";
+        $query = "INSERT INTO securitymodulestable (RegisteredAt, RegisteredBy, SeriesNo, Nickname) VALUES (:RegisteredAt,:RegisteredBy,:SeriesNo,:Nickname)";
 
         $stm = $con -> prepare($query);
         $stm -> execute($data);
@@ -86,6 +86,7 @@ function addSecurityModule(array $data = [])
         $response['Error']=null;
         $response['Message']="Security module registered";
         $_POST['SeriesNo'] = null;
+        $_POST['Nickname'] = null;
         return $response;
     }
     catch (PDOException $e) 
@@ -133,12 +134,12 @@ function removeSecurityModule($seriesNo)
     {
         $response = [];
 
-        $string = "mysql:hostname=".DBHOST.";dbname=".DBNAME;
+        $string = "mysql:host=".DBHOST.";dbname=".DBNAME;
         $con = new PDO($string, DBUSER, DBPASS);
 
         $query = "DELETE FROM securitymodulestable WHERE SeriesNo = :seriesNo";
         $stmt = $con->prepare($query);
-        $stmt->bindParam(':seriesNo', $seriesNo, PDO::PARAM_INT);
+        $stmt->bindParam(':seriesNo', $seriesNo, PDO::PARAM_STR);
         $stmt->execute();
         $rowCount = $stmt->rowCount();
 
@@ -394,7 +395,7 @@ function login($data)
         $string = "mysql:host=".DBHOST.";dbname=".DBNAME;
         $con = new PDO($string, DBUSER, DBPASS);
 
-        $sql = "SELECT * FROM userstable WHERE (Username = :_username OR Email = :_username) AND HashPassword = :_hpassword";
+        $sql = "SELECT * FROM userstable WHERE (Username = :_username OR UPPER(Email) = UPPER(:_username)) AND HashPassword = :_hpassword";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(':_username', $data['Username'], PDO::PARAM_STR); 
         $stmt->bindParam(':_hpassword', $data['HashPassword'], PDO::PARAM_STR); 

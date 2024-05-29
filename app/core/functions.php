@@ -49,6 +49,38 @@ function getSecurityModules($pageNo)
         return $response;
     }
 }
+function searchSecurityModule($seriesNo)
+{
+    try
+    {
+        $response = [];
+
+        $string = "mysql:hostname=".DBHOST.";dbname=".DBNAME;
+        $con = new PDO($string, DBUSER, DBPASS);
+
+        $query = "SELECT * FROM securitymodulestable WHERE SeriesNo = :SeriesNo";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':SeriesNo', $seriesNo, PDO::PARAM_STR); 
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $response['Success'] = true;
+        $response['Structure'] = $result;
+        $response['Error']=null;
+        $response['Message']=null;
+
+        return $response;
+    }
+    catch (PDOException $e) 
+    {
+
+        $response['Success'] = false;
+        $response['Structure'] = null;
+        $response['Error'] = $e->getMessage();
+        $response['Message']=null;
+        return $response;
+    }
+}
 function getSecurityModulesCount()
 {
     try

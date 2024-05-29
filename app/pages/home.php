@@ -1,5 +1,5 @@
 <?php 
-    $PageTitle = "Home";
+    $PageTitle = "Home";       
     if(!empty($_SESSION['Removed_SM']))
     {
         $server_messages['Removed'] = $_SESSION['Removed_SM'];
@@ -9,14 +9,49 @@
     {
         $SMCount = getSecurityModulesCount();
         $totalPages = ceil($SMCount / 20);
+        $adjacents = 2; // Number of adjacent pages to show on each side of the current page
+        
         echo '<div class="container mt-5">
-                <ul class="pagination" style="justify-content: center;">';
-                for ($i = 1; $i <= $totalPages; $i++) {
-                    $activeClass = ($i == $pageNo) ? 'active' : '';
-                    echo "<li class='page-item $activeClass'><a class='page-link' href='?page=$i'>$i</a></li>";
-                }
+                <ul class="pagination" style="justify-content: center; flex-wrap: wrap;">';
+        
+        if ($totalPages <= 10) {
+            // If total pages are less than or equal to 10, show all
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $activeClass = ($i == $pageNo) ? 'active' : '';
+                echo "<li class='page-item $activeClass'><a class='page-link' href='?page=$i'>$i</a></li>";
+            }
+        } else {
+            // Show the first page
+            $activeClass = (1 == $pageNo) ? 'active' : '';
+            echo "<li class='page-item $activeClass'><a class='page-link' href='?page=1'>1</a></li>";
+
+            // Show dots if needed
+            if ($pageNo > ($adjacents + 2)) {
+                echo "<li class='page-item disabled'><span class='page-link'>...</span></li>";
+            }
+
+            // Determine start and end page numbers
+            $start = max(2, $pageNo - $adjacents);
+            $end = min($totalPages - 1, $pageNo + $adjacents);
+
+            // Loop through start to end pages
+            for ($i = $start; $i <= $end; $i++) {
+                $activeClass = ($i == $pageNo) ? 'active' : '';
+                echo "<li class='page-item $activeClass'><a class='page-link' href='?page=$i'>$i</a></li>";
+            }
+
+            // Show dots if needed
+            if ($pageNo < ($totalPages - $adjacents - 1)) {
+                echo "<li class='page-item disabled'><span class='page-link'>...</span></li>";
+            }
+
+            // Show the last page
+            $activeClass = ($totalPages == $pageNo) ? 'active' : '';
+            echo "<li class='page-item $activeClass'><a class='page-link' href='?page=$totalPages'>$totalPages</a></li>";
+        }
+        
         echo '  </ul>
-              </div>';
+            </div>';
     }
     function renderTable($elements)
     {
@@ -127,6 +162,17 @@
                             Register security module
                         </a>
                     </div>
+                   <!-- Search Bar -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-0 my-2 my-md-3 mw-100 navbar-search col-12 p-0" method="POST">
+                        <div class="input-group col-5 p-0">
+                            <input type="text" class="form-control bg-light border-1 small" placeholder="Search security module..." aria-label="Search" aria-describedby="basic-addon2" name="query">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                   </form>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -135,9 +181,39 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <?php
-                                    $pageNo = isset($_GET['page']) ? $_GET['page'] : 1;
-                                    $response = getSecurityModules($pageNo);
-                                    processResponse($response, $pageNo);
+                                    if($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_POST['query']))
+                                    {
+                                        $pageNo = isset($_GET['page']) ? $_GET['page'] : 1;
+                                        $response = getSecurityModules($pageNo);
+                                        processResponse($response, $pageNo);
+                                    }
+                                    else
+                                    {
+                                        $query = $_POST['query'];
+                                        if(strlen($query) < 5)
+                                        {
+                                            $errors['invalidQuery'] = "Invalid security module lenght.";
+                                        }
+                                        else
+                                        {
+                                            $result = searchSecurityModule($query);
+                                            if(!$result['Success'])
+                                            {
+                                                $errors['SearchError'] = $result['Error'];
+                                            }
+                                            else
+                                            {
+                                                if(sizeof($result['Structure']) < 1)
+                                                {
+                                                    echo 'Security module not found.';
+                                                }
+                                                else
+                                                {
+                                                    renderTable($result['Structure']);
+                                                }
+                                            }
+                                        }
+                                    }
                                 ?>
                             </div>
                         </div>
@@ -158,10 +234,8 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
     <!-- ALERTS -->

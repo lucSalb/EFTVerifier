@@ -22,19 +22,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($_POST['SeriesNo'])) {
             $errors['NoSm'] = "No security module was selected.";
         } else {
-            $SeriesNo = $_POST['SeriesNo'];
-            $EditSMName = $_POST['EditSMName'];
-            $StatusSMName = $_POST['StatusSMName'];
-            $EditSMSeriesNo = $_POST['EditSMSeriesNo'];
-
-            //$response = removeSecurityModule($securityModuleNo);
+            $DATA["SeriesNo"] = $_POST['SeriesNo'];
+            $DATA["Nickname"] = $_POST['EditSMName'];
+            $DATA["SMStatus"] = $_POST['StatusSMName'];
+            $DATA["SeriesNoEdit"] = $_POST['EditSMSeriesNo'];
+            if ($DATA["SeriesNoEdit"] !== $DATA["SeriesNo"]) {
+                $response = validateSeriesNo($DATA["SeriesNoEdit"]);
+                if (!$response['Structure']) {
+                    echo '<script>';
+                    echo "$('#EditSMModal').modal('hide');";
+                    echo '</script>';
+                    $_SESSION['EDITED_SM_ERROR'] = "Security module number is already registered in the system.";
+                    echo "<meta http-equiv='refresh' content='0'>";
+                    return;
+                }
+            }
+            $response = editSecurityModule($DATA);
             if (!$response['Success']) {
-                $errors["ErrorOnRemove"] = $response['Error'];
+                $errors["ErrorOnEdit"] = $response['Error'];
             } else {
                 echo '<script>';
-                echo "$('#deleteSMModal').modal('hide');";
+                echo "$('#EditSMModal').modal('hide');";
                 echo '</script>';
-                $_SESSION['Removed_SM'] = $response['Message'];
+                $_SESSION['EDITED_SM'] = $response['Message'];
                 echo "<meta http-equiv='refresh' content='0'>";
             }
         }
@@ -136,7 +146,7 @@ switch ($PageTitle) {
         echo "<div class=\"modal fade\" id=\"EditSMModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"EditModalLabel\" aria-hidden=\"true\">
                  <div class=\"modal-dialog\" role=\"document\">
                      <form class=\"modal-content\" method=\"post\">
-                         <input id='SMSNo' name='SeriesNo' hidden/>
+                         <input id='SMEdtNo' name='SeriesNo' hidden value=\"\"/>
                          <div class=\"modal-header\">
                              <h5 class=\"modal-title\" id=\"EditModalLabel\">Edit security module</h5>
                              <button class=\"close\" type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\">

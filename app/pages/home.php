@@ -4,6 +4,14 @@ if (!empty($_SESSION['Removed_SM'])) {
     $server_messages['Removed'] = $_SESSION['Removed_SM'];
     unset($_SESSION['Removed_SM']);
 }
+if (!empty($_SESSION['EDITED_SM'])) {
+    $server_messages['Edited'] = $_SESSION['EDITED_SM'];
+    unset($_SESSION['EDITED_SM']);
+}
+if (!empty($_SESSION['EDITED_SM_ERROR'])) {
+    $errors['EDITED_SM_ERROR'] = $_SESSION['EDITED_SM_ERROR'];
+    unset($_SESSION['EDITED_SM_ERROR']);
+}
 function renderPagination($pageNo)
 {
     $SMCount = getSecurityModulesCount();
@@ -84,8 +92,8 @@ function renderTable($elements)
         echo '  <td>' . $module['RegisteredBy'] . '</td>';
         echo '  <td>' . $module['SeriesNo'] . '</td>';
         echo '  <td>' . $module['Nickname'] . '</td>';
-        echo '  <td>' . $module['Nickname'] . '</td>';
-        echo '  <td "width:80px"><a onclick="editSM(\'' . $module['SeriesNo'] . "','" . $module['Nickname'] . "','" . $module['Nickname'] . '\')" class="delete-btn"><i class="fas fa-solid fa-edit"></i></a></td>';
+        echo '  <td>' . $module['SMStatus'] . '</td>';
+        echo '  <td "width:80px"><a onclick="editSM(\'' . $module['SeriesNo'] . "','" . $module['Nickname'] . "','" . $module['SMStatus'] . '\')" class="delete-btn"><i class="fas fa-solid fa-edit"></i></a></td>';
         echo '  <td "width:80px"><a onclick="removeSM(\'' . $module['SeriesNo'] . '\')" class="delete-btn"><i class="fas fa-solid fa-trash"></i></a></td>';
         echo '</tr>';
     }
@@ -184,11 +192,7 @@ function processResponse($response, $pageNo)
                         <div class="card-body">
                             <div class="table-responsive">
                                 <?php
-                                if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_POST['query'])) {
-                                    $pageNo = isset($_GET['page']) ? $_GET['page'] : 1;
-                                    $response = getSecurityModules($pageNo);
-                                    processResponse($response, $pageNo);
-                                } else {
+                                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                                     $query = $_POST['query'];
                                     if (strlen($query) < 5) {
                                         $errors['invalidQuery'] = "Invalid security module lenght.";
@@ -204,6 +208,10 @@ function processResponse($response, $pageNo)
                                             }
                                         }
                                     }
+                                } else {
+                                    $pageNo = isset($_GET['page']) ? $_GET['page'] : 1;
+                                    $response = getSecurityModules($pageNo);
+                                    processResponse($response, $pageNo);
                                 }
                                 ?>
                             </div>
@@ -255,7 +263,7 @@ function processResponse($response, $pageNo)
             $('#deleteSMModal').modal('show');
         }
         function editSM(seriesNo, name, status) {
-            var smInput = document.getElementById('SMSNo');
+            var smInput = document.getElementById('SMEdtNo');
             smInput.value = seriesNo;
 
             var EditSMSeriesNo = document.getElementById('EditSMSeriesNo');

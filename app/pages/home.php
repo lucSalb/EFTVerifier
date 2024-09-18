@@ -269,6 +269,9 @@ function processResponse($response, $pageNo)
             var EditSMSeriesNo = document.getElementById('EditSMSeriesNo');
             EditSMSeriesNo.value = seriesNo;
 
+            var StatusSMName = document.getElementById('StatusSMName');
+            StatusSMName.value = status;
+
             var EditSMName = document.getElementById('EditSMName');
             EditSMName.value = name;
 

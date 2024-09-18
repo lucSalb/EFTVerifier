@@ -164,6 +164,7 @@ switch ($PageTitle) {
                                     <select value=\"\" class=\"form-control form-control-user\" id=\"StatusSMName\" name=\"StatusSMName\">
                                         <option value=\"Active\">Active</option>
                                         <option value=\"Deregistered\">Deregistered</option>
+                                        <option value=\"Suspended\">Suspended</option>                                        
                                     </select>
                                 </div>
                                 <div class='row'>
